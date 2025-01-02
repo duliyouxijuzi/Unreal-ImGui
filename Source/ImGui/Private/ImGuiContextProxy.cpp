@@ -87,8 +87,9 @@ FImGuiContextProxy::FImGuiContextProxy(const FString& InName, int32 InContextInd
 	// Start initialization.
 	ImGuiIO& IO = ImGui::GetIO();
 
-	// Set session data storage.
-	IO.IniFilename = StringCast<ANSICHAR>(*IniFilename).Get();
+	// Manually load data session.
+	IO.IniFilename = NULL;
+	ImGui::LoadIniSettingsFromDisk(StringCast<ANSICHAR>(*IniFilename).Get());
 
 	// Start with the default canvas size.
 	ResetDisplaySize();
@@ -115,6 +116,9 @@ FImGuiContextProxy::~FImGuiContextProxy()
 
 		// Ensure frame has ended
 		EndFrame();	
+
+		// Manually save data session.
+		ImGui::SaveIniSettingsToDisk(StringCast<ANSICHAR>(*IniFilename).Get());
 		
 		// Save context data and destroy.
 		ImGui::DestroyContext(Context);
