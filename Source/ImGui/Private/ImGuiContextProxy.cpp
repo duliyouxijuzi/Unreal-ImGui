@@ -88,7 +88,7 @@ FImGuiContextProxy::FImGuiContextProxy(const FString& InName, int32 InContextInd
 	ImGuiIO& IO = ImGui::GetIO();
 
 	// Manually load data session.
-	IO.IniFilename = NULL;
+	IO.IniFilename = nullptr;
 	ImGui::LoadIniSettingsFromDisk(StringCast<ANSICHAR>(*IniFilename).Get());
 
 	// Start with the default canvas size.
